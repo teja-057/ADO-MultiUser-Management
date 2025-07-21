@@ -1,0 +1,35 @@
+trigger: none
+
+variables:
+  ADO_ORG: 'tejaraghumandala0'
+  csvPath: 'users.csv'
+
+pool:
+  name: Default
+
+jobs:
+- job: processUsers
+  steps:
+  - task: PowerShell@2
+    displayName: 'Process users from CSV'
+    inputs:
+      targetType: 'inline'
+      script: |
+        $ErrorActionPreference = 'Stop'
+
+        $csv = Import-Csv "$(csvPath)"
+        foreach ($user in $csv) {
+          $email = $user.email
+          $license = $user.licenseType
+          $remove = $user.remove
+
+          Write-Host "`n=== Processing $email (Remove: $remove, License: $license) ==="
+
+          if ($remove -eq 'yes') {
+            Write-Host "Calling remove-user.ps1"
+            .\scripts\remove-user.ps1 -Email $email
+          } else {
+            Write-Host "Calling add-user.ps1"
+            .\scripts\add-user.ps1 -Email $email -License $license
+          }
+        }

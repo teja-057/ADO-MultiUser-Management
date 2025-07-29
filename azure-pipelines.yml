@@ -1,7 +1,7 @@
 trigger: none
 variables:
   ADO_PAT: $(ADO_PAT)     # Secure variable
-  ADO_ORG: 'your-org-name'
+  ADO_ORG: 'tejaraghumandala0'
 
 pool:
   name: Default

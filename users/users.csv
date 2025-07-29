@@ -1,3 +1,4 @@
 email,licensetype,projectname,grouptype
-user1@gmail.com,stakeholder,MyProject,projectReaders
-user2@gmail.com,stakeholder,MyProject,projectContributors
+user1@gmail.com,stakeholder,Automation-1,projectReader
+user2@gmail.com,stakeholder,Digital Test Project,projectReader
+user3@gmail.com,stakeholder,Test-1,projectReader

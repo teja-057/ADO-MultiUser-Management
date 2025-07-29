@@ -9,8 +9,8 @@ if (-not (Test-Path $CsvPath)) {
     exit 1
 }
 
-$auth = [Convert]::ToBase64String([Text.Encoding]::ASCII.GetBytes(":$Pat"))
-$headers = @{ Authorization = "Basic $auth"; "Content-Type" = "application/json" }
+# $auth = [Convert]::ToBase64String([Text.Encoding]::ASCII.GetBytes(":$Pat"))
+# $headers = @{ Authorization = "Basic $auth"; "Content-Type" = "application/json" }
 
 $users = Import-Csv -Path $CsvPath
 

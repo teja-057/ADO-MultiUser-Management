@@ -1,6 +1,7 @@
 trigger: none
+
 variables:
-  ADO_PAT: $(ADO_PAT)     # Secure variable
+  ADO_PAT: $(ADO_PAT)     # Secure variable set in the pipeline or library
   ADO_ORG: 'tejaraghumandala0'
 
 pool:
@@ -11,4 +12,8 @@ steps:
     inputs:
       targetType: 'filePath'
       filePath: 'scripts/add-users-from-csv.ps1'
+      arguments: >
+        -CsvPath "$(Build.SourcesDirectory)/users/users.csv"
+        -Organization "$(ADO_ORG)"
+        -Pat "$(ADO_PAT)"
     displayName: 'Add Users to Azure DevOps'

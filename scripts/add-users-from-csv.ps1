@@ -1,7 +1,7 @@
 param (
-    [string]$CsvPath = "$(Build.SourcesDirectory)\users.csv",
-    [string]$Organization = "$(ADO_ORG)",
-    [string]$Pat = "$(ADO_PAT)"
+    [string]$CsvPath,
+    [string]$Organization,
+    [string]$Pat
 )
 
 if (-not (Test-Path $CsvPath)) {

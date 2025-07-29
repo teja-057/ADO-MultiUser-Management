@@ -1,4 +1,3 @@
-email,licensetype
-user1@gmail.com,stakeholder
-user2@gmail.com,express
-user3@gmail.com,stakeholder
+email,licensetype,projectname,grouptype
+user1@gmail.com,stakeholder,MyProject,projectReaders
+user2@gmail.com,stakeholder,MyProject,projectContributors

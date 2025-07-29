@@ -1,0 +1,20 @@
+trigger: none
+
+variables:
+  ADO_ORG: 'tejaraghumandala0'
+
+pool:
+  name: Default
+
+steps:
+  - task: PowerShell@2
+    inputs:
+      targetType: 'filePath'
+      filePath: 'scripts/add-users-to-project.ps1'
+      arguments: >
+        -CsvPath "$(Build.SourcesDirectory)/users/users.csv"
+        -Organization "$(ADO_ORG)"
+        -Pat "$(ADO_PAT)"
+    env:
+      ADO_PAT: $(ADO_PAT)
+    displayName: 'Add Users to Azure DevOps Org and Project'

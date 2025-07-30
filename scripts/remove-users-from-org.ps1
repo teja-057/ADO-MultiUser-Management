@@ -38,7 +38,7 @@ foreach ($user in $users) {
 
     $top = 1500
     $skip = 0
-    $url = "https://vsaex.dev.azure.com/$Organization/_apis/userentitlements?api-version=4.1-preview.1&skip=$skip&top=$top"
+    $url = "https://vsaex.dev.azure.com/$Organization/_apis/userentitlements?api-version=7.1-preview.1&skip=$skip&top=$top"
 
     try {
         $response = Invoke-RestMethod -Uri $url -Headers $headers
@@ -63,7 +63,7 @@ foreach ($user in $users) {
         continue
     }
 
-    $deleteUrl = "https://vsaex.dev.azure.com/$Organization/_apis/userentitlements/$userId?api-version=4.1-preview.1"
+    $deleteUrl = "https://vsaex.dev.azure.com/$Organization/_apis/userentitlements/$userId?api-version=7.1-preview.1"
 
     try {
         Invoke-RestMethod -Uri $deleteUrl -Method Delete -Headers $headers

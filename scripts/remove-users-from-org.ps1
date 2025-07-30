@@ -64,8 +64,7 @@ foreach ($user in $users) {
         continue
     }
 
-    $deleteUrl = "https://vsaex.dev.azure.com/$Organization/_apis/userentitlements/$userId?api-version=4.1-preview.1"
-
+    $deleteUrl = "https://vsaex.dev.azure.com/$($organization)/_apis/userentitlements/$($userId)?api-version=4.1-preview.1"
     try {
         Invoke-RestMethod -Uri $deleteUrl -Method Delete -Headers $headers
         Write-Output "Successfully deleted user '$email' from organization '$Organization'."

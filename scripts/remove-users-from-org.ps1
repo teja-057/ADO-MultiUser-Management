@@ -15,15 +15,15 @@ if (-not $Organization) {
 }
 
 if (-not (Test-Path $CsvPath)) {
-    Write-Error "CSV file not found at path: $CsvPath"
+    Write-Error "CSV file not found at: $CsvPath"
     exit 1
 }
 
-# Prepare auth header
+# Prepare headers
 $auth = [Convert]::ToBase64String([Text.Encoding]::ASCII.GetBytes(":$Pat"))
 $headers = @{ Authorization = "Basic $auth"; "Content-Type" = "application/json" }
 
-# Read CSV
+# Read users from CSV
 $users = Import-Csv -Path $CsvPath
 
 foreach ($user in $users) {
@@ -36,9 +36,10 @@ foreach ($user in $users) {
 
     Write-Output "`n=== Attempting to remove user: $email ==="
 
+    # Step 1: Get user entitlement details
     $top = 1500
     $skip = 0
-    $url = "https://vsaex.dev.azure.com/$Organization/_apis/userentitlements?api-version=7.1-preview.1&skip=$skip&top=$top"
+    $url = "https://vsaex.dev.azure.com/$Organization/_apis/userentitlements?api-version=4.1-preview.1&skip=$skip&top=$top"
 
     try {
         $response = Invoke-RestMethod -Uri $url -Headers $headers
@@ -63,7 +64,7 @@ foreach ($user in $users) {
         continue
     }
 
-    $deleteUrl = "https://vsaex.dev.azure.com/$Organization/_apis/userentitlements/$userId?api-version=7.1-preview.1"
+    $deleteUrl = "https://vsaex.dev.azure.com/$Organization/_apis/userentitlements/$userId?api-version=4.1-preview.1"
 
     try {
         Invoke-RestMethod -Uri $deleteUrl -Method Delete -Headers $headers
